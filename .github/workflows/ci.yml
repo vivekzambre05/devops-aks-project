@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: Azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        run: az acr login --name vivekacr001
+
+      - name: Build & Push
+        run: |
+          docker build -t vivekacr001.azurecr.io/node-app:${{ github.sha }} .
+          docker push vivekacr001.azurecr.io/node-app:${{ github.sha }}
