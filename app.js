@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
   }
 
   res.writeHead(200);
-  res.end(`Hello from AKS ${VERSION} 🚀`);
+  res.end(`Hello from AKS vivek ${VERSION}`);
 });
 
 server.listen(PORT);
