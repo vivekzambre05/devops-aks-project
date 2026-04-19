@@ -30,3 +30,7 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             -t vivekacr001.azurecr.io/node-app:${{ github.sha }} \
             --push .
+
+      - name: Update Helm values
+        run: |
+          sed -i "s/tag:.*/tag: ${{ github.sha }}/" helm/node-app/values.yaml
